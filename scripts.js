@@ -1,93 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+const btn = document.getElementById('surpriseBtn');
+const surprise = document.getElementById('surpriseMsg');
 
-html, body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #667eea, #764ba2);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
+// Load the roar sound (make sure the file is in the same folder)
+const roarSound = new Audio('tiger-roar-loudly-193229.mp3'); // Replace this with your MP3 file path
+roarSound.volume = 1.0;
 
-.container {
-  text-align: center;
-  max-width: 360px;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-  animation: fadeInScale 1.2s ease forwards;
-}
-
-h1 {
-  font-weight: 600;
-  font-size: 2.8rem;
-  margin-bottom: 0.3rem;
-  letter-spacing: 1.5px;
-  text-shadow: 2px 3px 15px rgba(0,0,0,0.4);
-}
-
-p.subtitle {
-  font-weight: 300;
-  font-size: 1.2rem;
-  margin: 0 0 2rem;
-  color: #ddd;
-}
-
-button {
-  background: linear-gradient(45deg, #ff758c, #ff7eb3);
-  border: none;
-  border-radius: 50px;
-  padding: 0.8rem 2.5rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.6);
-  user-select: none;
-}
-
-button:hover {
-  background: linear-gradient(45deg, #ff7eb3, #ff758c);
-  box-shadow: 0 9px 18px rgba(255, 126, 179, 0.85);
-  transform: scale(1.05);
-}
-
-.surprise {
-  margin-top: 2rem;
-  font-size: 1.3rem;
-  opacity: 0;
-  transform: translateY(10px);
-  color: #ffe066;
-  text-shadow: 1px 1px 4px #8a6d1b;
-  transition: all 0.6s ease;
-}
-
-.surprise.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.7);
+btn.addEventListener('click', () => {
+  if (surprise.classList.contains('show')) {
+    // Hide message and stop the roar
+    surprise.classList.remove('show');
+    btn.textContent = 'Do some roar 🐯';
+    roarSound.pause();
+    roarSound.currentTime = 0; // rewind
+  } else {
+    // Show message and play roar
+    surprise.classList.add('show');
+    btn.textContent = 'Quiet now 🙈';
+    roarSound.play();
+    createTigerParticles(); // Add tiger emojis on roar
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+});
+
+// Function to create floating tiger emojis
+function createTigerParticles() {
+  const maxParticles = 40;
+  for (let i = 0; i < maxParticles; i++) {
+    let p = document.createElement('div');
+    p.classList.add('particle');
+    p.style.fontSize = Math.floor(Math.random() * 20 + 20) + 'px'; // Random size
+    p.style.position = 'absolute';
+    p.style.top = Math.random() * 100 + 'vh';
+    p.style.left = Math.random() * 100 + 'vw';
+    p.style.animationDuration = (Math.random() * 15 + 10) + 's';
+    p.style.animationName = 'floatUp';
+    p.style.opacity = Math.random() * 0.5 + 0.4;
+    p.textContent = '🐯'; // Tiger emoji
+    document.body.appendChild(p);
   }
 }
 
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  pointer-events: none;
-}
+// Optional CSS for floating effect
+const styleSheet = document.styleSheets[0];
+styleSheet.insertRule(`@keyframes floatUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-120vh); }
+}`, styleSheet.cssRules.length);
