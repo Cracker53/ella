@@ -13,7 +13,7 @@ btn.addEventListener('click', () => {
     roarSound.pause();
     roarSound.currentTime = 0; // rewind
   } else {
-    // Show message and play roar
+    // Show message and play roar ella
     surprise.classList.add('show');
     btn.textContent = 'Quiet now 🙈';
     roarSound.play();
