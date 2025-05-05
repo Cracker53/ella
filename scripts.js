@@ -1,8 +1,7 @@
-// Get the button and surprise message elements
 const btn = document.getElementById('surpriseBtn');
 const surprise = document.getElementById('surpriseMsg');
+const roarSound = document.getElementById('roarSound');
 
-// Event listener to toggle surprise message visibility
 btn.addEventListener('click', () => {
   if (surprise.classList.contains('show')) {
     surprise.classList.remove('show');
@@ -10,14 +9,14 @@ btn.addEventListener('click', () => {
   } else {
     surprise.classList.add('show');
     btn.textContent = 'Hide surprise 🙈';
+    roarSound.currentTime = 0;
+    roarSound.play();
   }
 });
 
-// Particle effect creation and animation
 const colors = ['#ffffff', '#f0e68c', '#ffd700', '#ff69b4'];
 const maxParticles = 40;
 
-// Create particles
 for (let i = 0; i < maxParticles; i++) {
   let p = document.createElement('div');
   p.classList.add('particle');
@@ -31,7 +30,6 @@ for (let i = 0; i < maxParticles; i++) {
   document.body.appendChild(p);
 }
 
-// Add the animation for the particle effect
 const styleSheet = document.styleSheets[0];
 styleSheet.insertRule(`@keyframes floatUp {
   0% { transform: translateY(0); }
