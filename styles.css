@@ -38,6 +38,7 @@ p.subtitle {
 }
 
 button {
+  background: #ff758c;
   background: linear-gradient(45deg, #ff758c, #ff7eb3);
   border: none;
   border-radius: 50px;
@@ -83,11 +84,13 @@ button:hover {
   }
 }
 
+/* Floating tiger emoji styles */
 .particle {
+  font-size: 30px; /* Adjust this value to change emoji size */
+  opacity: 0.8;
   position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   pointer-events: none;
+  user-select: none;
 }
